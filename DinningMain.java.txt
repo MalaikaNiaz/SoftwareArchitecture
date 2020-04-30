@@ -1,0 +1,29 @@
+public class DinningMain
+{
+    public static void main(String[] args)
+    {
+        int philosopherno = 8;
+        final Philosopher philosophers[] = new Philosopher[philosopherno];
+        Fork forks[] = new Fork[philosopherno];
+        for (int i = 0; i < philosopherno; i++)
+        {
+            forks[i] = new Fork();
+        }
+        for (int i = 0; i < philosopherno; i++)
+        {
+            Fork left = forks[i];
+            Fork right= forks[(i+1)% philosopherno];
+            if (i == philosophers.length - 1) {
+                philosophers[i] = new Philosopher(i,right, left);
+            }
+            else {
+                philosophers[i] = new Philosopher(i, left, right);
+            }
+            Thread t = new Thread( philosophers[i],"Philosopher "+ (i+1));
+            t.run();
+
+        }
+
+
+    }
+}
